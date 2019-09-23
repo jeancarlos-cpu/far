@@ -25,6 +25,8 @@ import Calendar from '@material-ui/icons/CalendarToday';
 import Description from '@material-ui/icons/Description';
 import Gavel from '@material-ui/icons/Gavel';
 import Folder from '@material-ui/icons/Folder';
+import TrendingUp from '@material-ui/icons/TrendingUp';
+import HowToReg from '@material-ui/icons/HowToReg';
 
 
 const drawerWidth = 240;
@@ -113,6 +115,11 @@ export default function PersistentDrawerLeft() {
         setOpenCollapse4(!openCollapse4);
     }
 
+    const [openCollapse5, setOpenCollapse5] = React.useState(false);
+    function handleOpenSettings5() {
+        setOpenCollapse5(!openCollapse5);
+    }
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -141,7 +148,7 @@ export default function PersistentDrawerLeft() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
-                        Gestão em segurança do trabalho e saúde ocupacional
+                        Gestão em Segurança do Trabalho e Saúde Ocupacional
           </Typography>
                 </Toolbar>
             </AppBar>
@@ -166,7 +173,7 @@ export default function PersistentDrawerLeft() {
                         <ListItemIcon>
                             <History />
                         </ListItemIcon>
-                        <ListItemText primary="Histórico do empregado" />
+                        <ListItemText primary="Histórico do Empregado" />
                         {openCollapse1 ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
                     <Collapse in={openCollapse1} timeout="auto" unmountOnExit>
@@ -177,13 +184,16 @@ export default function PersistentDrawerLeft() {
                             <ListItem button className={classes.nested}>
                                 <ListItemText primary="Cópia ASO" />
                             </ListItem>
+                            <ListItem button className={classes.nested}>
+                                <ListItemText primary="Copia de Atestado" />
+                            </ListItem>
                         </List>
                     </Collapse>
                     <Divider />
 
                     <ListItem button onClick={handleOpenSettings2}>
                         <ListItemIcon>
-                            <Settings />
+                            <HowToReg />
                         </ListItemIcon>
                         <ListItemText primary="Treinamentos" />
                         {openCollapse2 ? <ExpandLess /> : <ExpandMore />}
@@ -191,7 +201,10 @@ export default function PersistentDrawerLeft() {
                     <Collapse in={openCollapse2} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
                             <ListItem button className={classes.nested}>
-                                <ListItemText primary="Certificados" />
+                                <ListItemText primary="Novo Treinamento" />
+                            </ListItem>
+                            <ListItem button className={classes.nested}>
+                                <ListItemText primary="Cópias Certificados" />
                             </ListItem>
                         </List>
                     </Collapse>
@@ -201,7 +214,7 @@ export default function PersistentDrawerLeft() {
                         <ListItemIcon>
                             <Gavel />
                         </ListItemIcon>
-                        <ListItemText primary="Auditorias e Inspeções" />
+                        <ListItemText primary="Auditorias, Inspeções e Atas" />
                         {openCollapse3 ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
                     <Collapse in={openCollapse3} timeout="auto" unmountOnExit>
@@ -217,6 +230,31 @@ export default function PersistentDrawerLeft() {
                             </ListItem>
                             <ListItem button className={classes.nested}>
                                 <ListItemText primary="Desvios de segurança" />
+                            </ListItem>
+                            <ListItem button className={classes.nested}>
+                                <ListItemText primary="Teste de Fumaça" />
+                            </ListItem>
+                            <ListItem button className={classes.nested}>
+                                <ListItemText primary="Atas de Reuniões" />
+                            </ListItem>
+                        </List>
+                    </Collapse>
+                    <Divider />
+                    
+                    <ListItem button onClick={handleOpenSettings5}>
+                        <ListItemIcon>
+                            <TrendingUp />
+                        </ListItemIcon>
+                        <ListItemText primary="Procedimentos, AST/ART" />
+                        {openCollapse5 ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={openCollapse5} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItem button className={classes.nested}>
+                                <ListItemText primary="Procedimentos Operacionais" />
+                            </ListItem>
+                            <ListItem button className={classes.nested}>
+                                <ListItemText primary="AST/ART" />
                             </ListItem>
                         </List>
                     </Collapse>
@@ -266,9 +304,9 @@ export default function PersistentDrawerLeft() {
                     </Collapse>
                     <Divider />
 
-                    <ListItem button key="CIPA E CIPAMIN">
+                    <ListItem button key="CIPA e CIPAMIN">
                         <ListItemIcon><MailIcon /></ListItemIcon>
-                        <ListItemText primary="CIPA E CIPAMIN" />
+                        <ListItemText primary="CIPA e CIPAMIN" />
                     </ListItem>
                     <Divider />
 
