@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,17 +14,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import { createMuiTheme } from "@material-ui/core/styles";
-import { ThemeProvider, mergeClasses } from "@material-ui/styles";
-import pink from "@material-ui/core/colors/pink";
-import red from "@material-ui/core/colors/red";
-import { purple } from "@material-ui/core/colors";
+import { ThemeProvider } from "@material-ui/styles";
+
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        Works Engenharia
+        Empresa
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -64,7 +62,32 @@ const theme = createMuiTheme({
   }
 });
 
-export default function SignIn({handleOnSignIn}) {
+export default function SignIn({ handleOnSignIn }) {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (evt) => {
+    evt.preventDefault();
+    fetch('http://167.71.249.122:80/signin', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    })
+      .then(response => response.json())
+      .then((validade) => {
+        if (validade.status === "true") {
+          handleOnSignIn();
+        }
+      }
+      )
+  }
+
+
+
   const classes = useStyles();
 
   return (
@@ -78,7 +101,7 @@ export default function SignIn({handleOnSignIn}) {
           <Typography component="h1" variant="h5">
             Acesso Restrito
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={handleLogin}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -86,20 +109,20 @@ export default function SignIn({handleOnSignIn}) {
               fullWidth
               id="email"
               label="Endereço de e-mail"
-              name="email"
               autoComplete="email"
               autoFocus
+              onChange={e => setEmail(e.target.value)}
             />
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              name="password"
               label="Senha"
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={e => setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -111,7 +134,6 @@ export default function SignIn({handleOnSignIn}) {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick = {handleOnSignIn}
             >
               Entrar
             </Button>
@@ -123,7 +145,7 @@ export default function SignIn({handleOnSignIn}) {
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Não possui conta? Registre-se"}
+                  {"Registre-se"}
                 </Link>
               </Grid>
             </Grid>

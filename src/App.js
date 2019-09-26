@@ -12,7 +12,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: false
+      loggedIn: false,
     }
   }
 
@@ -20,12 +20,10 @@ class App extends Component {
     this.setState({ loggedIn: true });
   }
 
-
-
   render() {
 
     if (this.state.loggedIn) {
-      return <Drawer/>;
+      return <Drawer />;
     }
     else {
       return <SignIn handleOnSignIn={this.handleOnSignIn} />;
